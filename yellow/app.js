@@ -34,8 +34,8 @@ function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 }
 
-app.use(ipfilter(allowed_subnet, { mode: 'allow' }));
-app.use(ipfilter(denied_ip, { mode: 'deny' }));
+// app.use(ipfilter(allowed_subnet, { mode: 'allow' }));
+// app.use(ipfilter(denied_ip, { mode: 'deny' }));
 
 module.exports = app;
 
@@ -43,9 +43,10 @@ app.use(favicon(path.join(__dirname,'views','favicon.ico')));
 
 // Assign route
 app.use('/', (req, res) => {
+    console.log('Recibida petición en /');
     let joke_number = getRandomInt(10);
     data["joke"] = jokes[joke_number];
-    res.render('/app/views/index.pug', data);
+    res.render('index.pug', data);
 });
 
 // Error handler
@@ -58,6 +59,6 @@ app.use(function(err, req, res, _next) {
 });
 
 // Start server
-app.listen(80, () => {
-    console.log('App listening on port 80');
+app.listen(4000, '0.0.0.0', () => {
+    console.log('App listening on port 4000');
 });

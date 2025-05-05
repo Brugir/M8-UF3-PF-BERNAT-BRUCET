@@ -5,34 +5,34 @@
 
 # 1.1.1 | Use the following base image "node:17.0-alpine3.14"
 
-    FROM node:17.0-alpine3.14
+FROM node:17.0-alpine3.14
 
 # 1.1.2 | Working directory inside the containers should be "/app"
 
-    WORKDIR /app
+WORKDIR /app
 
 # 1.1.3 | Copy "package*.json" file(s) to working directory
 
-    COPY package*.json ./
+COPY package*.json ./
 
 # 1.1.4 | Install "npm=7.17.0-r0" package manager, then install dependency packages
 
-    RUN npm install
+RUN npm install
 
 # 1.1.5 | Copy "app.js" file to working directory
 
-    COPY app.js ./
+COPY app.js ./
 
 # 1.1.6 | Copy the "index.pug" and "favicon.ico" files to the "/app/views" directory
 
-    RUN mkdir /p views
-    COPY index.pug ./views
-    COPY favicon.ico ./views
+RUN mkdir -p views
+COPY index.pug ./views
+COPY favicon.ico ./views
 
-# 1.1.7 | The port "80" should be exposed by the container
+# 1.1.7 | The port "5000" should be exposed by the container
 
-    EXPOSE 80
+EXPOSE 5000
 
 # 1.1.8 | The container must execute the command "node app.js" in run time
 
-    CMD ["node", "app.js"]
+CMD ["node", "app.js"]
